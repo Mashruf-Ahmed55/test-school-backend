@@ -61,7 +61,7 @@ if (envConfig.nodeEnv === 'production') {
   // More restrictive CORS for production
   app.use(
     cors({
-      origin: envConfig.allowedOrigins,
+      origin: ['https://test-school-frontend-taupe.vercel.app'],
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
       allowedHeaders: ['Content-Type', 'Authorization'],
