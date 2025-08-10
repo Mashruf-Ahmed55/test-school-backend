@@ -1,12 +1,11 @@
 import mongoose, { Model, Schema } from 'mongoose';
-import { CertificationLevel, CompetencyArea, IQuestion } from '../types';
+import { CertificationLevel, IQuestion } from '../types';
 
 const questionSchema: Schema<IQuestion> = new Schema(
   {
     competency: {
       type: String,
       required: [true, 'Competency area is required'],
-      enum: Object.values(CompetencyArea),
     },
     level: {
       type: String,

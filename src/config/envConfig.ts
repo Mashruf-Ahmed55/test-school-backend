@@ -17,15 +17,11 @@ const _config = {
   appName: process.env.APP_NAME,
   // add ENV TODO:
   sebConfigKey: process.env.SEB_CONFIG_KEY,
-  sebAllowedKeys: process.env.SEB_ALLOWED_KEYS
-    ? process.env.SEB_ALLOWED_KEYS.split(',')
-    : [],
+  sebAllowedKeys: process.env.SEB_ALLOWED_KEY,
   baseUrl: process.env.BASE_URL,
   supportEmail: process.env.SUPPORT_EMAIL,
   logoUrl: process.env.LOGO_URL,
-  allowedOrigins: process.env.ALLOWED_ORIGINS
-    ? process.env.ALLOWED_ORIGINS.split(',')
-    : ['http://localhost:5713'],
+  allowedOrigins: process.env.ALLOWED_ORIGIN,
 };
 
 const envConfig = Object.freeze(_config);

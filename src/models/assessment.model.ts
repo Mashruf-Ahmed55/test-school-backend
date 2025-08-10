@@ -29,12 +29,6 @@ const assessmentSchema: Schema<IAssessment> = new Schema(
     answers: {
       type: [Number],
       required: true,
-      validate: {
-        validator: function (this: IAssessment, answers: number[]) {
-          return answers.length === this.questions.length;
-        },
-        message: 'Answers array must match questions array length',
-      },
     },
     score: {
       type: Number,

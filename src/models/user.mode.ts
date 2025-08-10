@@ -38,7 +38,7 @@ const userSchema: Schema<IUser> = new Schema(
     certificationLevel: {
       type: String,
       enum: Object.values(CertificationLevel),
-      default: undefined,
+      default: CertificationLevel.A1,
     },
     lastAssessmentDate: {
       type: Date,

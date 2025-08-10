@@ -9,7 +9,7 @@ import { CertificationLevel } from '../types';
 const QUESTIONS_PER_LEVEL = 44;
 const TIME_PER_QUESTION = 60;
 
-//  Start assessment
+// Start assessment
 export const startAssessment = async (
   req: any,
   res: Response,
@@ -20,17 +20,25 @@ export const startAssessment = async (
     const user = await User.findById(id);
 
     if (!user) {
-      return next(createHttpError.NotFound('User not found'));
+      next(createHttpError.NotFound('User not found'));
+    }
+
+    // Highest level check - prevent test if already completed
+    if (user?.certificationLevel === CertificationLevel.C2) {
+      res.status(400).json({
+        success: false,
+        message: 'You have already completed the highest certification level.',
+      });
     }
 
     // Determine which step the user should take
     let step = 1;
     let level: CertificationLevel = CertificationLevel.A1;
 
-    if (user.certificationLevel === CertificationLevel.A2) {
+    if (user?.certificationLevel === CertificationLevel.A2) {
       step = 2;
       level = CertificationLevel.B1;
-    } else if (user.certificationLevel === CertificationLevel.B2) {
+    } else if (user?.certificationLevel === CertificationLevel.B2) {
       step = 3;
       level = CertificationLevel.C1;
     }
@@ -41,12 +49,6 @@ export const startAssessment = async (
       { $sample: { size: QUESTIONS_PER_LEVEL } },
       { $project: { correctAnswer: 0 } },
     ]);
-
-    if (questions.length < QUESTIONS_PER_LEVEL) {
-      return next(
-        createHttpError.InternalServerError('Not enough questions available')
-      );
-    }
 
     // Create assessment record
     const assessment = await Assessment.create({
@@ -107,6 +109,7 @@ export const submitAssessment = async (
     if (assessment.completedAt) {
       return next(createHttpError.Conflict('Assessment already submitted'));
     }
+
 
     // Calculate score
     let correctCount = 0;

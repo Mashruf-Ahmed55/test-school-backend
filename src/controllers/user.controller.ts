@@ -131,8 +131,12 @@ export const loginUser = async (
         name: user.name,
         email: user.email,
         role: user.role,
-        accessToken,
+        isEmailVerified: user.isEmailVerified,
+        certificationLevel: user.certificationLevel,
+        lastAssessmentDate: user.lastAssessmentDate,
+        assessmentAttempts: user.assessmentAttempts,
       },
+      accessToken,
     });
   } catch (error) {
     next(error);
@@ -154,7 +158,6 @@ export const verifyEmail = async (
 
     // Find user
     const user = await User.findOne({ email }).select('+otp +otpExpires');
-    console.log(user);
     if (!user) {
       return next(createHttpError.NotFound('User not found'));
     }
@@ -346,6 +349,99 @@ export const logoutUser = async (
     res.status(200).json({
       success: true,
       message: 'Logged out successfully',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const forgotPassword = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { email } = req.body;
+
+    // Validation
+    if (!email) {
+      return next(createHttpError.BadRequest('Email is required'));
+    }
+
+    // Find user
+    const user = await User.findOne({ email });
+    if (!user) {
+      return next(createHttpError.NotFound('User not found'));
+    }
+
+    // Generate new OTP
+    user.generateOTP();
+    await user.save();
+
+    const emailData = {
+      name: user.name,
+      otp: user.otp,
+      expiryMinutes: 10,
+      appName: envConfig.appName,
+      currentYear: new Date().getFullYear(),
+    };
+
+    await sendEmail({
+      to: user.email,
+      subject: 'Reset Your Password',
+      template: 'otp-verification',
+      data: emailData,
+    });
+
+    // Response
+    res.status(200).json({
+      success: true,
+      message: 'New OTP sent successfully',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const resetPassword = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { email, otp, newPassword } = req.body;
+
+    // Validation
+    if (!email || !otp || !newPassword) {
+      return next(
+        createHttpError.BadRequest('Email, OTP, and new password are required')
+      );
+    }
+
+    // Find user
+    const user = await User.findOne({ email }).select('+otp +otpExpires');
+    if (!user) {
+      return next(createHttpError.NotFound('User not found'));
+    }
+
+    // Verify OTP
+    if (!user.otp || user.otp !== otp) {
+      return next(createHttpError.BadRequest('Invalid OTP'));
+    }
+
+    // Check if OTP has expired
+    if (user.otpExpires && user.otpExpires < new Date()) {
+      return next(createHttpError.BadRequest('OTP has expired'));
+    }
+
+    // Update password
+    user.password = newPassword;
+    await user.save();
+
+    // Response
+    res.status(200).json({
+      success: true,
+      message: 'Password reset successfully',
     });
   } catch (error) {
     next(error);

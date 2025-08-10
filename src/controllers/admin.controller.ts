@@ -78,6 +78,33 @@ export const getCertificationStats = async (
   }
 };
 
+export const getAllUsers = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { page = '1', pageSize = '10' } = req.query;
+
+    const pageNumber = Number(page);
+    const limitNumber = Number(pageSize);
+
+    const users = await User.find()
+      .select('-password -refreshToken')
+      .skip((pageNumber - 1) * limitNumber)
+      .limit(limitNumber);
+
+    const total = await User.countDocuments();
+
+    res.status(200).json({
+      items: users,
+      total,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const manageUser = async (
   req: Request,
   res: Response,

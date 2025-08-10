@@ -58,34 +58,45 @@ export const createQuestion = async (
 };
 
 // Get questions
+
 export const getQuestions = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { competency, level, page = 1, limit = 10 } = req.query;
+    const { competency, levels, page = '1', pageSize = '10' } = req.query;
+
     const filter: any = { isActive: true };
 
     if (competency) filter.competency = competency;
-    if (level) filter.level = level;
 
+    // levels expected as comma separated string or array (depending on frontend)
+    // So normalize it:
+    if (levels) {
+      // levels can be string or array from query params, normalize to array
+      const levelsArray = Array.isArray(levels)
+        ? levels
+        : (levels as string).split(',');
+
+      filter.level = { $in: levelsArray };
+    }
+
+    const pageNumber = Number(page);
+    const limitNumber = Number(pageSize);
+
+    // Query questions with pagination and filter, exclude 'correctAnswer'
     const questions = await Question.find(filter)
       .select('-correctAnswer')
-      .skip((Number(page) - 1) * Number(limit))
-      .limit(Number(limit));
+      .skip((pageNumber - 1) * limitNumber)
+      .limit(limitNumber);
 
     const total = await Question.countDocuments(filter);
 
+    // Respond with shape frontend expects
     res.status(200).json({
-      success: true,
-      data: questions,
-      pagination: {
-        page: Number(page),
-        limit: Number(limit),
-        total,
-        pages: Math.ceil(total / Number(limit)),
-      },
+      items: questions,
+      total,
     });
   } catch (error) {
     next(error);

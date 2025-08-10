@@ -1,0 +1,205 @@
+[
+  {
+    "competency": "Networking",
+    "level": "B1",
+    "questionText": "Which system uses the kernel?",
+    "options": ["Windows", "Linux", "macOS", "All of these"],
+    "correctAnswer": 3,
+    "explanation": "Kernel is the core part of all operating systems."
+  },
+  {
+    "competency": "Networking",
+    "level": "B2",
+    "questionText": "What is the function of DNS?",
+    "options": [
+      "Translate domain names to IP addresses",
+      "Secure internet connection",
+      "Assign IP addresses",
+      "Manage network routes"
+    ],
+    "correctAnswer": 0,
+    "explanation": "DNS resolves domain names to IP addresses."
+  },
+  {
+    "competency": "Networking",
+    "level": "B2",
+    "questionText": "What is a VPN used for?",
+    "options": [
+      "Virtual Private Network",
+      "Virus Protection Network",
+      "Voice Protocol Network",
+      "Verified Private Network"
+    ],
+    "correctAnswer": 0,
+    "explanation": "VPN creates a secure connection over the internet."
+  },
+  {
+    "competency": "Programming",
+    "level": "B2",
+    "questionText": "What does 'async' mean in JavaScript?",
+    "options": [
+      "Runs code immediately",
+      "Runs code asynchronously",
+      "Blocks code execution",
+      "None of the above"
+    ],
+    "correctAnswer": 1,
+    "explanation": "'async' allows asynchronous execution of code."
+  },
+  {
+    "competency": "Databases",
+    "level": "B2",
+    "questionText": "What is indexing in databases?",
+    "options": [
+      "Sorting data",
+      "Creating data structure for faster search",
+      "Encrypting data",
+      "Deleting data"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Indexing speeds up data retrieval."
+  },
+  {
+    "competency": "Networking",
+    "level": "B2",
+    "questionText": "What is a shell in OS?",
+    "options": [
+      "A hardware component",
+      "A user interface for access",
+      "An application",
+      "A programming language"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Shell provides command line interface to the OS."
+  },
+  {
+    "competency": "Networking",
+    "level": "C1",
+    "questionText": "What does NAT do in networking?",
+    "options": [
+      "Translates private IP to public IP",
+      "Secures data transmission",
+      "Monitors network traffic",
+      "Connects two networks"
+    ],
+    "correctAnswer": 0,
+    "explanation": "NAT allows multiple devices to share one public IP."
+  },
+  {
+    "competency": "Networking",
+    "level": "C1",
+    "questionText": "What is a zero-day exploit?",
+    "options": [
+      "A newly discovered vulnerability",
+      "A virus",
+      "An antivirus software",
+      "A firewall rule"
+    ],
+    "correctAnswer": 0,
+    "explanation": "A zero-day exploit is a security hole unknown to software vendors."
+  },
+  {
+    "competency": "Programming",
+    "level": "C1",
+    "questionText": "What is closure in JavaScript?",
+    "options": [
+      "A function bundled with its lexical environment",
+      "A loop",
+      "A variable",
+      "An object"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Closure allows function to access outer scope variables."
+  },
+  {
+    "competency": "Databases",
+    "level": "C1",
+    "questionText": "What is ACID in databases?",
+    "options": [
+      "A type of database",
+      "Set of properties to ensure reliable transactions",
+      "A data format",
+      "A programming language"
+    ],
+    "correctAnswer": 1,
+    "explanation": "ACID ensures database transactions are reliable."
+  },
+  {
+    "competency": "Networking",
+    "level": "C1",
+    "questionText": "What is virtualization?",
+    "options": [
+      "Creating virtual versions of hardware or OS",
+      "Hardware upgrade",
+      "Installing new software",
+      "Backup process"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Virtualization allows running multiple OS on one physical machine."
+  },
+  {
+    "competency": "Networking",
+    "level": "C2",
+    "questionText": "What is BGP in networking?",
+    "options": [
+      "Border Gateway Protocol",
+      "Basic Gateway Protocol",
+      "Broadcast Gateway Protocol",
+      "Binary Gateway Protocol"
+    ],
+    "correctAnswer": 0,
+    "explanation": "BGP is the protocol for exchanging routing information between gateways."
+  },
+  {
+    "competency": "Security",
+    "level": "C2",
+    "questionText": "What is encryption?",
+    "options": [
+      "Converting data to a secure format",
+      "Deleting data",
+      "Storing data",
+      "Transferring data"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Encryption protects data confidentiality."
+  },
+  {
+    "competency": "Programming",
+    "level": "C2",
+    "questionText": "What is a Promise in JavaScript?",
+    "options": [
+      "An object representing eventual completion of async operation",
+      "A function",
+      "A variable",
+      "An event"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Promises handle asynchronous operations in JS."
+  },
+  {
+    "competency": "Databases",
+    "level": "C2",
+    "questionText": "What is sharding in databases?",
+    "options": [
+      "Splitting database horizontally",
+      "Encrypting database",
+      "Backing up database",
+      "Deleting database"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Sharding distributes data across multiple servers."
+  },
+  {
+    "competency": "Operating Systems",
+    "level": "C2",
+    "questionText": "What is a kernel panic?",
+    "options": [
+      "A critical system error",
+      "A successful boot",
+      "An update",
+      "A virus"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Kernel panic means the OS encountered a fatal error."
+  }
+]

@@ -53,7 +53,6 @@ const certificateSchema: Schema<ICertificate> = new Schema(
 
 // Indexes for efficient querying
 certificateSchema.index({ user: 1 });
-certificateSchema.index({ certificateId: 1 });
 certificateSchema.index({ level: 1, issuedAt: -1 });
 
 const Certificate: Model<ICertificate> = mongoose.model<ICertificate>(

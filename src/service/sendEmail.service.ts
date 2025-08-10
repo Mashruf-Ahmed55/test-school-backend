@@ -16,7 +16,7 @@ interface EmailAttachment {
 }
 
 interface EmailOptions {
-  to: string | string[];
+  to: string;
   subject: string;
   template: string;
   data?: Record<string, any>;
@@ -47,17 +47,22 @@ export const sendEmail = async (
   try {
     // Render HTML template
     const html = await renderEmailTemplate(template, data);
-
+    let processedAttachments: EmailAttachment[] = [];
     // Prepare and validate attachments
-    const processedAttachments = processAttachments(attachments);
+    if (attachments.length > 0) {
+      processedAttachments = processAttachments(attachments);
+    }
 
     // Send email
     const info = await transporter.sendMail({
       from: `"${envConfig.appName}" <${envConfig.smtpUser}>`,
-      to: Array.isArray(to) ? to.join(', ') : to,
+      to: to,
       subject,
       html,
-      attachments: processedAttachments,
+      attachments:
+        processedAttachments && processedAttachments.length > 0
+          ? processedAttachments
+          : undefined,
     });
 
     await logEmailSuccess(info.messageId, options);
@@ -85,7 +90,7 @@ async function renderEmailTemplate(
 ): Promise<string> {
   const templatePath = path.join(
     __dirname,
-    '../views/emails',
+    '../utils/email-templates',
     `${template}.ejs`
   );
 
@@ -116,7 +121,7 @@ async function logEmailSuccess(messageId: string, options: EmailOptions) {
   try {
     await SystemLog.create({
       level: 'info',
-      category: 'email',
+      category: 'authentication',
       message: `Email sent to ${options.to}`,
       metadata: {
         subject: options.subject,
