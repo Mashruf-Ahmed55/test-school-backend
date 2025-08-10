@@ -3,7 +3,7 @@ import path from 'path';
 import PDFDocument from 'pdfkit';
 import { fileURLToPath } from 'url';
 import envConfig from '../config/envConfig.js';
-import { CertificationLevel } from '../types';
+import { CertificationLevel } from '../types/type.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

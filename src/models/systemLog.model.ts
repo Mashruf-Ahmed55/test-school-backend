@@ -1,5 +1,5 @@
 import mongoose, { Model, Schema } from 'mongoose';
-import { ISystemLog, LogCategory, LogLevel } from '../types';
+import { ISystemLog, LogCategory, LogLevel } from '../types/type.js';
 
 const systemLogSchema: Schema<ISystemLog> = new Schema(
   {

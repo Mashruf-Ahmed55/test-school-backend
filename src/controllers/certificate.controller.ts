@@ -3,15 +3,15 @@ import fs from 'fs';
 import createHttpError from 'http-errors';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import envConfig from '../config/envConfig';
+import envConfig from '../config/envConfig.js';
 
 import Assessment from '../models/assessment.model.js';
-import Certificate from '../models/certificate.model';
+import Certificate from '../models/certificate.model.js';
 import User from '../models/user.mode.js';
 import { generateCertificatePDF } from '../service/certificate.service.js';
 
-import { sendEmail } from '../service/sendEmail.service';
-import { CertificationLevel } from '../types';
+import { sendEmail } from '../service/sendEmail.service.js';
+import { CertificationLevel } from '../types/type.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

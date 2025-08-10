@@ -2,8 +2,8 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import mongoose, { Model, Schema } from 'mongoose';
 import validator from 'validator';
-import envConfig from '../config/envConfig';
-import { CertificationLevel, IUser, UserRole } from '../types';
+import envConfig from '../config/envConfig.js';
+import { CertificationLevel, IUser, UserRole } from '../types/type.js';
 
 const userSchema: Schema<IUser> = new Schema(
   {

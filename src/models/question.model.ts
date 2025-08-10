@@ -1,5 +1,5 @@
 import mongoose, { Model, Schema } from 'mongoose';
-import { CertificationLevel, IQuestion } from '../types';
+import { CertificationLevel, IQuestion } from '../types/type.js';
 
 const questionSchema: Schema<IQuestion> = new Schema(
   {

@@ -3,7 +3,7 @@ import createHttpError from 'http-errors';
 import Assessment from '../models/assessment.model.js';
 import Question from '../models/question.model.js';
 import User from '../models/user.mode.js';
-import { CertificationLevel } from '../types';
+import { CertificationLevel } from '../types/type.js';
 
 // Constants
 const QUESTIONS_PER_LEVEL = 44;
@@ -109,7 +109,6 @@ export const submitAssessment = async (
     if (assessment.completedAt) {
       return next(createHttpError.Conflict('Assessment already submitted'));
     }
-
 
     // Calculate score
     let correctCount = 0;

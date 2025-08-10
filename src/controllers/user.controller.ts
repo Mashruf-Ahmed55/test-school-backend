@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 import createHttpError from 'http-errors';
 import jwt from 'jsonwebtoken';
-import envConfig from '../config/envConfig';
+import envConfig from '../config/envConfig.js';
 
-import User from '../models/user.mode';
+import User from '../models/user.mode.js';
 
-import { sendEmail } from '../service/sendEmail.service';
-import { jwtPayload, UserRole } from '../types';
+import { sendEmail } from '../service/sendEmail.service.js';
+import { jwtPayload, UserRole } from '../types/type.js';
 
 export const registerUser = async (
   req: Request,

@@ -5,9 +5,9 @@ import {
   getQuestionBankStats,
   getSystemStats,
   manageUser,
-} from '../controllers/admin.controller';
-import { authenticateUser } from '../middleware/authenticateUser';
-import { authorizeRoles } from '../middleware/protectAdmin';
+} from '../controllers/admin.controller.js';
+import { authenticateUser } from '../middleware/authenticateUser.js';
+import { authorizeRoles } from '../middleware/protectAdmin.js';
 
 export const adminRouter = Router();
 
